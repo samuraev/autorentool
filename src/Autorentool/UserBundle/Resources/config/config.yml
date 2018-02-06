@@ -1,0 +1,71 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+framework:
+    translator: { fallbacks: ['%locale%'] }
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
+    auth_mode:  '%mailer_auth_mode%'
+    encryption: '%mailer_encryption%'
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Autorentool\UserBundle\Entity\User
+    group:
+        group_class: Autorentool\UserBundle\Entity\Group
+
+    from_email:
+        address: a.samuraj@yandex.com
+        sender_name: AutorentoolZerspanungstechnik
+
+    registration:
+        confirmation:
+            enabled: true
+            from_email:
+                address: alexey.samuraev@gmail.com
+                sender_name: Submit registration
+        form:
+            type: Autorentool\UserBundle\Form\RegistrationType
+    resetting:
+        email:
+            template:   '@FOSUser/Resetting/email.txt.twig'
+
+easy_admin:
+    site_name: 'Adminpanel'
+    design:
+        assets:
+            favicon: 'img/favicon.ico'
+    entities:
+        Users:
+            class: Autorentool\UserBundle\Entity\User
+            list:
+                fields:
+                    - id
+                    - first_name
+                    - last_name
+                    - username
+                    - email
+                    - roles
+                    - factoryName
+                    - enabled
+            form:
+                fields:
+                    - first_name
+                    - last_name
+                    - username
+                    - email
+                    - roles
+                    - factoryName
+                    - enabled
+                    - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }

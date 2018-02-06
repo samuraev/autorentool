@@ -1,0 +1,230 @@
+{% extends '@AutorentoolCore/main/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/newtask.css') }}">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('css/chosen.min.css') }}" type="text/css"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/newtask.js') }}"></script>
+    <script src="{{ asset('js/chosen.jquery.min.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {% set identifier = form.vars.value.identifier %}
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-2">
+                {% if (app.request.attributes.get('_route') == 'taskeditsingle') or
+                      (app.request.attributes.get('_route') == 'taskeditmultiple') or
+                      (app.request.attributes.get('_route') == 'taskedithotspot') or
+                      (app.request.attributes.get('_route') == 'taskedittable') or
+                      (app.request.attributes.get('_route') == 'taskeditdragtable') %}
+
+                    <script>
+                        renameNavTabNewToEdit();
+                    </script>
+                    <button class="btn btn-default dropdown-toggle currentTaskType" type="button" disabled>
+                        {% if (app.request.attributes.get('_route') == 'taskeditsingle') %}
+                            Single Choice
+                        {% elseif (app.request.attributes.get('_route') == 'taskeditmultiple') %}
+                            Multiple Choice
+                        {% elseif (app.request.attributes.get('_route') == 'taskedithotspot') %}
+                            Hotspot
+                        {% elseif (app.request.attributes.get('_route') == 'taskedittable') %}
+                            Tabelle
+                        {% elseif (app.request.attributes.get('_route') == 'taskeditdragtable') %}
+                            Drag'n'Drop
+                        {% else %}
+                            Choose task type
+                        {% endif %}
+                        <span class="caret"></span>
+                    </button>
+                {% else %}
+                <button class="btn btn-default dropdown-toggle currentTaskType" type="button" data-toggle="dropdown" style="width: 100%;">
+                    {% if (app.request.attributes.get('_route') == 'newtasksinglechoice') %}
+                        Single Choice
+                    {% elseif (app.request.attributes.get('_route') == 'newtaskmultiplechoice') %}
+                        Multiple Choice
+                    {% elseif (app.request.attributes.get('_route') == 'newtaskhotspot') %}
+                        Hotspot
+                    {% elseif (app.request.attributes.get('_route') == 'newtasktable') %}
+                        Tabelle
+                    {% elseif (app.request.attributes.get('_route') == 'newtaskdragtable') %}
+                        Drag'n'Drop
+                    {% else %}
+                        Aufgabeauswahl
+                    {% endif %}
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="{{ path('newtasksinglechoice') }}">Single Choice</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ path('newtaskmultiplechoice') }}">Multiple Choice</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ path('newtaskhotspot') }}">Hotspot</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ path('newtasktable') }}">Tabelle</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ path('newtaskdragtable') }}">Drag'n'Drop</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col-md-10">
+                {{ form_row(form.currentCategory) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.tittle) }}
+            </div>
+        </div>
+        <div class="row">
+            {% if identifier == 'choice' or identifier == 'choiceMultiple' or identifier == 'table' or identifier == 'dragndropTable' %}
+                <div class="col-md-10">
+                    {{ form_row(form.itemBody.paragraph) }}
+                </div>
+                <div class="col-md-2" align="center">
+                    <label class="tittel-image-label" for="{{ form.itemBody.imgSrc.vars.id }}" onchange="setTittleImage({{ form.itemBody.imgSrc.vars.id }})">
+                        {% if (form.itemBody.imgSrc.vars.data) %}
+                            <img src="{{ asset('uploads/img/' ~ identifier ~ '/' ~ form.itemBody.imgSrc.vars.data.filename) }}" class="tittle-img-preview" alt="Kein Bild"/>
+                        {% else %}
+                            <img src="{{ asset('img/empty.svg') }}" class="tittle-img-preview" alt="Kein Bild"/>
+                        {% endif %}
+                        {{ form_row(form.itemBody.imgSrc) }}
+                        {{ form_row(form.itemBody.removeImgSrcState) }}
+                        <button type="button"  class="removeImgLinkButton" id="removeTittleImgLink">[Remove]</button>
+                    </label>
+                </div>
+            {% elseif identifier == 'positionObjects' %}
+                <div class="col-md-12">
+                    {{ form_row(form.itemBody.paragraph) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="support-container">
+            <a class="btn btn-primary" id="support-toggle" data-toggle="collapse" href="#collapseSupport" role="button" aria-expanded="false" aria-controls="collapseSupport">
+                <i class="glyphicon glyphicon-menu-down"></i> Hilfe hinzufügen
+            </a>
+        </div>
+        <div class="collapse" id="collapseSupport">
+            <div class="card card-body container-fluid">
+                <div class="support-container">
+                    {{ form_widget(form.support.supportType) }}
+                </div>
+                <div class="support-media-container">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group input-group-media-support">
+                                <label class="input-group-btn">
+                                    <span class="btn btn-primary">
+                                        Browse&hellip; {{ form_widget(form.support.supportMedia.mediaSource) }}
+                                    </span>
+                                </label>
+                                {{ form_widget(form.support.supportMedia.mediaSourceOrigName) }}
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="button" class="btn btn-danger removeSupportImage" id="removeSupportImage"
+                                    data-tooltip="tooltip" title="Support Media entfernen">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                        {{ form_row(form.support.supportMedia.prompt) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row support-textbox-container">
+                    <div class="col-md-12">
+                        {{ form_row(form.support.supportTextbox.textboxContent) }}
+                    </div>
+                </div>
+                <div class="row support-selection-container">
+                    <div class="col-md-12">
+                        {{ form_row(form.support.supportSelection.currentSelection) }}
+                    </div>
+                </div>
+                <div class="row support-table-container">
+                    <div class="col-md-12">
+                        {{ include('AutorentoolCoreBundle:Tasks/Table:supporttable.html.twig', {'form': form.support.supportTable}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% if (app.request.attributes.get('_route') == 'newtasksinglechoice') or
+                        (app.request.attributes.get('_route') == 'newtaskmultiplechoice') or
+                        (app.request.attributes.get('_route') == 'taskeditsingle') or
+                        (app.request.attributes.get('_route') == 'taskeditmultiple') %}
+                    {{ include('AutorentoolCoreBundle:Tasks/SingleMultipleChoice:choices.html.twig', {'form': form }) }}
+                {% elseif (app.request.attributes.get('_route') == 'newtaskhotspot') or
+                          (app.request.attributes.get('_route') == 'taskedithotspot') %}
+                    {{ include('AutorentoolCoreBundle:Tasks/Hotspot:hotspot.html.twig', {'form': form, 'identifier': identifier}) }}
+                {% elseif (app.request.attributes.get('_route') == 'newtasktable') or
+                          (app.request.attributes.get('_route') == 'taskedittable') %}
+                    {{ include('AutorentoolCoreBundle:Tasks/Table:table.html.twig', {'form': form, 'pals': pals}) }}
+                {% elseif (app.request.attributes.get('_route') == 'newtaskdragtable') or
+                          (app.request.attributes.get('_route') == 'taskeditdragtable') %}
+                    {{ include('AutorentoolCoreBundle:Tasks/Table:dragtable.html.twig', {'form': form}) }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align: right;">
+                {{ form_label(form.stateOfTask) }}
+                {{ form_widget(form.stateOfTask) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-tasksave-container">
+
+        {% if (app.request.attributes.get('_route') == 'taskeditsingle') or
+              (app.request.attributes.get('_route') == 'taskeditmultiple') or
+              (app.request.attributes.get('_route') == 'taskedithotspot') or
+              (app.request.attributes.get('_route') == 'taskedittable') or
+              (app.request.attributes.get('_route') == 'taskeditdragtable') %}
+            <button type="button" class="btn btn-success pull-right btn-savetask"
+                    data-uuid-link="{{ form.vars.data.uuid }}">
+                <i class="glyphicon glyphicon-save-file"></i>
+                Speichern
+            </button>
+        {% else %}
+            <button type="button" class="btn btn-success pull-right btn-savetask">
+                <i class="glyphicon glyphicon-save-file"></i>
+                Speichern
+            </button>
+        {% endif %}
+        <a type="button" href="{{ path('taskaktiv', {'uuid': form.vars.data.uuid}) }} }}" class="btn btn-danger pull-right btn-cancel">
+            <i class="glyphicon glyphicon-remove"></i>
+            Abbrechen
+        </a>
+    </div>
+    {{ form_end(form) }}
+
+    <!-- Modal Submit-->
+    <div class="modal fade" id="modalAddRelated" tabindex="-1" role="dialog">
+        {{ include('AutorentoolCoreBundle:Tasks:modal_taskspool.html.twig') }}
+    </div>
+
+    <!-- Modal Submit-->
+    <div class="modal fade" id="modalTaskNotFound" tabindex="-1" role="dialog">
+        {{ include('AutorentoolCoreBundle:Tasks:modal_task_notfound.html.twig') }}
+    </div>
+
+{% endblock %}
+

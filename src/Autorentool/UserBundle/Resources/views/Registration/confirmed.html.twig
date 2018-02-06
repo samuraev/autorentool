@@ -1,0 +1,22 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="login-container">
+    <div class="login-form">
+        <h3 class="onl_authTitle" data-toggle="tooltip" data-placement="bottom" title="Recommended: Lumen Theme"><span class="glyphicon glyphicon-user"></span> Registrationbestätigung</h3>
+
+        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+        {% if targetUrl %}
+        <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+        {% endif %}
+
+        <span class="help-block"></span>
+
+        <p align=right>
+            <a href="{{ path('taskspool') }}">Zurück zur Hauptseite</a>
+        </p>
+    </div>
+</div>
+{% endblock fos_user_content %}

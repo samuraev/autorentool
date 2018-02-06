@@ -1,0 +1,22 @@
+{% extends '@AutorentoolCore/main/index.html.twig' %}
+
+{% block body %}
+    <div class="loading-animation">
+        <div class="container-fluid" style="margin-top: 20px">
+            <form>
+                <div>
+                    <input type="text" class="package-data" id="newpackage-tittle" placeholder="Tittle des Paketes" required>
+                </div>
+                <div>
+                    <textarea class="package-data" id="newpackage-description" placeholder="Beschreibung des Paketes" required></textarea>
+                </div>
+
+                <div class="tasksbtn-container">
+                    <button class="btn btn-success pull-right" disabled id="create-taskspackage"><i class="glyphicon glyphicon-save"></i>
+                        Erstellen
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

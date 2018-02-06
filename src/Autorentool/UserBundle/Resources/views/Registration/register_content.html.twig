@@ -1,0 +1,83 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+
+{% block fos_user_content %}
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="login-container">
+        <img src="{{ asset('img/logo.png') }}">
+        <div class="login-form">
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'onl_loginForm', 'autocomplete':'off'}}) }}
+
+            <h3 class="onl_authTitle" data-toggle="tooltip" data-placement="bottom" title="Recommended: Lumen Theme"><span class="glyphicon glyphicon-user"></span> Registrieren</h3>
+
+            {% if not form.vars.valid %}
+                <div class="alert alert-danger fade in">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Error!</strong> {{ form_errors(form) }}
+                </div>
+            {% endif %}
+
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder':'Vorname'}}) }}
+            </div>
+
+            <span class="help-block"></span>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span></span>
+                {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder':'Nachname'}}) }}
+            </div>
+
+            <span class="help-block"></span>
+
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder':'form.username'}}) }}
+            </div>
+
+            <span class="help-block"></span>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-email"></span>@</span>
+                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder':'form.email'}}) }}
+            </div>
+            {{ form_errors(form.email) }}
+
+            <span class="help-block"></span>
+
+            <div class="input-group input-group-password">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-lock"></i>
+                </span>
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder':'form.password'}}) }}
+            </div>
+            {{ form_errors(form.plainPassword.first) }}
+
+            <span class="help-block"></span>
+
+            <div class="input-group input-group-password">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-lock"></i>
+                </span>
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder':'form.password_confirmation'}}) }}
+            </div>
+
+            <span class="help-block"></span>
+
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-briefcase"></span></span>
+                {{ form_widget(form.factoryName, {'attr': {'class': 'form-control', 'placeholder':'Betrieb'}}) }}
+            </div>
+
+            <span class="help-block"></span>
+
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'registration.submit'|trans }}" />
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

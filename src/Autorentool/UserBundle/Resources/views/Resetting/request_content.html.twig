@@ -1,0 +1,26 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+
+{% block fos_user_content %}
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="login-container">
+        <img src="{{ asset('img/logo.png') }}">
+        <div class="login-form">
+            <h3 class="onl_authTitle" data-toggle="tooltip" data-placement="bottom" ><span class="glyphicon glyphicon-lock"></span> {{ 'resetting.request.submit'|trans }}</h3>
+
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-email"></span>@</span>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="{{ 'resetting.request.username'|trans }}" required="required" />
+                </div>
+
+                <span class="help-block"></span>
+
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'resetting.request.submit'|trans }}" />
+            </form>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

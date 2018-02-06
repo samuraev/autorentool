@@ -1,0 +1,55 @@
+<script src="{{ asset('js/hotspottask.js') }}"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+
+<table id="smc-table" class="table dt-responsive nowrap" cellspacing="0" border="1" style="border:1px solid lightgray;">
+    <thead>
+    <tr>
+        <th><p>Bearbeitende<br>Antwot</p></th>
+        <th><p>Formtyp</p></th>
+        <th><p>Bescreibung</p></th>
+        <th><p>Delete</p></th>
+    </tr>
+    </thead>
+    <tbody class="smc-tbody" data-prototype="{{ include('AutorentoolCoreBundle:Tasks/Hotspot:answer.html.twig',
+                            {'form': form.responseDeclaration.areaMapping.areaMapEntry.vars.prototype })|e }}">
+    {% for areaMapEntry in form.responseDeclaration.areaMapping.areaMapEntry %}
+        <tr>
+            {{ include('AutorentoolCoreBundle:Tasks/Hotspot:answer.html.twig', {'form': areaMapEntry}) }}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-sm-2">
+        <button class="btn btn-warning btn-task-questionadd" type="button"><i class="glyphicon glyphicon-plus"></i> Antwort</button>
+    </div>
+    <div class="col-sm-5">
+        <div class="input-group input-group-image-hotspot">
+            <label class="input-group-btn">
+                    <span class="btn btn-primary">
+                        Browse&hellip; {{ form_widget(form.itemBody.hotspotInteraction.outerObject.data) }}
+                    </span>
+            </label>
+            {{ form_widget(form.itemBody.hotspotInteraction.outerObject.dataOrigName) }}
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="btn-tasksave-container pull-right">
+            <button type="button" class="btn btn-link removeImg" id="removeImgLink">Bild <i class="glyphicon glyphicon-trash"></i></button>
+            <button type="button" class="btn btn-link clearImg" id="clearImgLink">Alle Formen <i class="glyphicon glyphicon-trash"></i></button>
+            <input type="checkbox" name="showAllCanvases" id="showAllCanvases" value="alleCanvases" checked>Alle Formen anzeigen<br>
+        </div>
+    </div>
+</div>
+<div class="row" style="padding: 10px">
+    <div class="col-md-12" id="parentOfCanvas">
+        {% if (form.itemBody.hotspotInteraction.outerObject.data.vars.data) %}
+            <img class="bgImage" id="bgImage"
+                 src="{{ asset('uploads/img/' ~ identifier ~ '/' ~ form.itemBody.hotspotInteraction.outerObject.data.vars.data.filename) }}">
+        {% else %}
+            <img class="bgImage" id="bgImage" src="{{ asset('img/keinbuild.svg')}}">
+        {% endif %}
+    </div>
+</div>

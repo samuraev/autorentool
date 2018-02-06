@@ -1,0 +1,93 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-family: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding-top: 65px;
+    color: #444;
+    background: #2c4975;
+    background: -moz-linear-gradient(-35deg, #2c4975 0, #3c5d8a 100%) fixed;
+    background: -webkit-linear-gradient(-35deg, #2c4975 0, #3c5d8a 100%) fixed;
+    background: linear-gradient(125deg, #2c4975 0, #3c5d8a 100%) fixed;
+}
+
+/* -------- Navbar ------- */
+.navbar {
+    padding: 0 20px 0 20px;
+    background: #2c4975;
+    background: -moz-linear-gradient(left, #2c4975 0, #4b6f9e 100%);
+    background: -webkit-linear-gradient(left, #2c4975 0, #4b6f9e 100%);
+    background: linear-gradient(to right, #2c4975 0, #4b6f9e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2c4975', endColorstr='#4b6f9e', GradientType=1);
+    -webkit-box-shadow: inset 0 -2px 0 0 rgba(32, 59, 94, 1);
+    -moz-box-shadow: inset 0 -2px 0 0 rgba(32, 59, 94, 1);
+    box-shadow: inset 0 -2px 0 0 rgba(32, 59, 94, 1);
+    border-bottom: 1px solid #375d98;
+}
+
+.header-time {
+    font-size: .86em;
+    opacity: .5;
+    cursor: default;
+    color: white;
+}
+
+.navbar .navbar-nav > li > a {
+    color: white;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    cursor:pointer;
+}
+
+.navbar .navbar-nav > li > a:hover {
+    color: white;
+    opacity: .8;
+}
+
+.white-box {
+    padding-bottom: 10px;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 2px 1px rgba(11, 28, 54, 1);
+    -moz-box-shadow: 0 1px 2px 1px rgba(11, 28, 54, 1);
+    box-shadow: 0 1px 2px 1px rgba(11, 28, 54, 1);
+    border-radius: 5px;
+
+    /* This section calls the slideInFromLeft animation we defined above
+    animation: 1s ease-out 0s 1 slideInFromAbove;*/
+}
+
+/*
+@keyframes slideInFromAbove {
+    0% {
+        transform: translateY(-130%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}*/
+
+.tasksdatatable th {
+    background-color: rgb(66, 139, 202);
+    color: white;
+}
+
+.tasksdatatable td {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tasktable-btn {
+    width: 30px;
+    height: 30px;
+    padding: 1px 0 0 1px;
+}
+
+.td-buttons-table {
+    text-align:center;
+}

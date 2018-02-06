@@ -1,0 +1,61 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+
+{% block fos_user_content %}
+<div class="login-container">
+    <div class="login-form">
+        <h3 class="onl_authTitle" data-toggle="tooltip" data-placement="bottom" title="Recommended: Lumen Theme">
+            <span class="glyphicon glyphicon-user"></span> Profil</h3>
+
+        <table id="profile-table" class="table dt-responsive nowrap" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td>
+                        <p>Vorname:</p>
+                    </td>
+                    <td>
+                        <p>{{ user.firstName }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Nachname:</p>
+                    </td>
+                    <td>
+                        <p>{{ user.lastName }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Benutzername:</p>
+                    </td>
+                    <td>
+                        <p>{{ user.username }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Email:</p>
+                    </td>
+                    <td>
+                        <p>{{ user.email }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Betrieb:</p>
+                    </td>
+                    <td>
+                        <p>{{ user.factoryName }}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <span class="help-block"></span>
+
+        <p align=right>
+            <a href="{{ path('taskspool') }}">Zurück zur Hauptseite</a>
+        </p>
+    </div>
+</div>
+{% endblock fos_user_content %}

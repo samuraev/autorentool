@@ -1,0 +1,30 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: azt
+    database_user: root
+    database_password: Z6379721a.
+    mailer_transport: smtp
+    mailer_host: smtp.gmail.com
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_port: 465
+    mailer_user: autorentool.zerspanungstechnik@gmail.com
+    mailer_password: Ab7&%0u$
+    secret: 3c709513225038af6bd69465ec99ee0d2b433216
+
+#parameters:
+#    database_host: ds.samalex.de
+#    database_port: 3307
+#    database_name: azt
+#    database_user: azt
+#    database_password: zerspanungstechnik
+#    mailer_transport: smtp
+#    mailer_host: smtp.gmail.com
+#    mailer_encryption: ssl
+#    mailer_auth_mode: login
+#    mailer_port: 465
+#    mailer_user: autorentool.zerspanungstechnik@gmail.com
+#    mailer_password: Ab7&%0u$
+#    secret: 3c709513225038af6bd69465ec99ee0d2b433216

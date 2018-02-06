@@ -1,0 +1,90 @@
+{% extends '@AutorentoolCore/main/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/taskspool.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/newpackage.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="loading-animation">
+        <div class="container-fluid" style="margin-top: 20px">
+            <form>
+                <div>
+                    <input type="text" class="package-data" id="newpackage-tittle" placeholder="Tittle des Paketes" required>
+                </div>
+                <div>
+                    <textarea class="package-data" id="newpackage-description" placeholder="Beschreibung des Paketes" required></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table id="newpackage-alltasks-table" class="table table-bordered dt-responsive nowrap tasksdatatable" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Tittle</th>
+                                <th>Erstellt</th>
+                                <th>Aufgabentyp</th>
+                                <th style="text-align:center">
+                                    <span class="glyphicon glyphicon-check" style="vertical-align:middle" aria-hidden="true"></span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="newpackage-alltasks-tbody">
+                            {% for assessment in assessemntItems %}
+                                <tr>
+                                    <td>{{ assessment.tittle }}</td>
+                                    <td>{{ assessment.creationTimestamp|date('d/m/y H:i:s', "Europe/Berlin") }}</td>
+                                    {% if assessment.identifier == 'choice' %}
+                                        <td>Single-Choice</td>
+                                    {% elseif assessment.identifier == 'choiceMultiple' %}
+                                        <td>Multiple-Choice</td>
+                                    {% elseif assessment.identifier == 'positionObjects' %}
+                                        <td>Hotspot</td>
+                                    {% elseif assessment.identifier == 'table' %}
+                                        <td>Table</td>
+                                    {% elseif assessment.identifier == 'dragndropTable' %}
+                                        <td>Drag'n'Drop</td>
+                                    {% endif %}
+                                    <td class="td-buttons-table">
+                                        <div class="checkbox radio-margin">
+                                            <label>
+                                                <input type="checkbox" id="checkbox" value="{{ assessment.uuid }}">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table id="newpackage-table" class="table table-bordered dt-responsive nowrap tasksdatatable" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Tittle</th>
+                                <th>Erstellt</th>
+                                <th>Aufgabentyp</th>
+                                <th style="text-align:center">
+                                    <span class="glyphicon glyphicon-trash" style="vertical-align:middle;" aria-hidden="true"></span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody id="newpackage-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tasksbtn-container">
+                    <button class="btn btn-success pull-right" disabled id="create-taskspackage"><i class="glyphicon glyphicon-save"></i>
+                        Erstellen
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

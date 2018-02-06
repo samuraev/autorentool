@@ -1,0 +1,64 @@
+<div style="overflow-x: scroll; overflow: visible;">
+    <table id="tabletask-table" class="table dt-responsive nowrap" cellspacing="0" border="1" style="border:1px solid lightgray;">
+        <tbody id="tabletask-tbody"
+               data-prototype="{{ form_widget(form.itemBody.tableInteraction.table.row.vars.prototype.cell.vars.prototype)|e  }}"
+               data-prototype="{{ form_widget(form.itemBody.tableInteraction.table.row.vars.prototype)|e  }}">
+
+        {% for row in form.itemBody.tableInteraction.table.row %}
+            <tr>
+                {% for cell in row.cell %}
+                    <td>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                {{ form_row(cell.writeable) }}
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_row(cell.head) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 pal-select-container">
+                                <select class="selectpicker show-tick select-palcommand"
+                                        data-size="10"
+                                        data-live-search="true"
+                                        title="Wähle einen PAL-Befehl">
+                                    {% for typeName,types in pals %}
+                                        <option disabled>{{ typeName }}</option>
+                                        {% for groupName,groups in types %}
+                                            <optgroup label="&nbsp;&nbsp;&nbsp;{{ groupName }}">
+                                                {% for command,description in groups %}
+                                                    <option data-subtext="{{ description }}">
+                                                        {{ command }}
+                                                    </option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{ form_row(cell.value) }}
+                            </div>
+                        </div>
+                    </td>
+                {% endfor %}
+
+                <td align="center">
+                    <button class="btn btn-sm btn-link delrow" disabled type="button"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <button class="btn btn-warning btn-task-questionadd table-row-add" type="button"><i class="glyphicon glyphicon-plus"></i> Zeile </button>
+    <button class="btn btn-warning btn-task-questionadd table-col-add" type="button"><i class="glyphicon glyphicon-plus"></i> Spalte</button>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/table.js') }}"></script>
+

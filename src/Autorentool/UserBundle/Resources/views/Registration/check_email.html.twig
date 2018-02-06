@@ -1,0 +1,15 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="login-container">
+        <div class="login-form text-center">
+            <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+
+            <span class="help-block"></span>
+
+            <p><a href="{{ path('fos_user_security_login') }}">Zurück zur Anmeldung</a></p>
+        </div>
+    </div>
+{% endblock %}

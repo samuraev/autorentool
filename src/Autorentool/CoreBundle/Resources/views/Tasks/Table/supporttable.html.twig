@@ -1,0 +1,29 @@
+<div style="overflow-x:auto;">
+    <table id="support-tabletask-table" class="table dt-responsive nowrap" cellspacing="0" border="1" style="border:1px solid lightgray;">
+        <tbody id="support-tabletask-tbody"
+               data-prototype="{{ form_widget(form.row.vars.prototype.cell.vars.prototype)|e  }}"
+               data-prototype="{{ form_widget(form.row.vars.prototype)|e  }}">
+
+        {% for row in form.row %}
+            <tr>
+                {% for cell in row.cell %}
+                    <td>
+                        {{ form_row(cell.head) }}
+                        {{ form_row(cell.value) }}
+                    </td>
+                {% endfor %}
+
+                <td align="center">
+                    <button class="btn btn-sm btn-link delsupportrow" disabled type="button"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <button class="btn btn-warning table-supportrow-add" type="button"><i class="glyphicon glyphicon-plus"></i> Zeile </button>
+    <button class="btn btn-warning table-supportcol-add" type="button"><i class="glyphicon glyphicon-plus"></i> Spalte</button>
+</div>
+
+<script type="text/javascript" src="{{ asset('js/supporttable.js') }}"></script>

@@ -1,0 +1,33 @@
+<!-- Modal content-->
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+            <h3 class="modal-title">Zusammengehörige Aufgaben</h3>
+        </div>
+        <div class="modal-body">
+            <table id="relatedtasks-table" class="table table-bordered dt-responsive nowrap tasksdatatable" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>Tittle</th>
+                    <th>Erstellt</th>
+                    <th style="text-align:center">
+                        <span class="glyphicon glyphicon-check" style="vertical-align:middle" aria-hidden="true"></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-link pull-left" id="related-refresh"><i class="glyphicon glyphicon-refresh"></i> Aktualisieren</button>
+
+            <a type="button" id="related-add" class="btn btn-sm btn-danger pull-right btn-savetask" data-dismiss="modal"
+               href=""><i class="glyphicon glyphicon-trash"></i> Hinzuzufügen</a>
+
+            <a type="button" id="related-cancel" class="btn btn-sm btn-default pull-right btn-savetask" data-dismiss="modal">
+                <i class="glyphicon glyphicon-remove"></i> Abbrechen</a>
+        </div>
+    </div>
+</div>

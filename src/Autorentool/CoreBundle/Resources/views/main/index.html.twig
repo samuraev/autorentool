@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Autorentool Zerspannungstechnik{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}"/>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- My CSS -->
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/mainstyle.css') }}">
+
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+        <!-- My JavaScript -->
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/jqueryValidationMessages.js') }}"></script>
+    {% endblock %}
+
+</head>
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false" aria-controls="navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img class="navbar-brand" src="{{ asset('img/logo.png') }}">
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a><span class="header-time"></span></a>
+                </li>
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>
+                        <a href="{{ path('fos_user_profile_show') }}">Benutzername: {{ app.user.username }}</a>
+                    </li>
+                {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li>
+                        <a class="loggedin-user"><b style="color: yellow">Benutzername: {{ app.user.username }}</b>
+                            logged in via a cookie (ie: Auth again before doing sensitive things)</a>
+                    </li>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li>
+                        <a href="{{ path('easyadmin') }}"><span class="glyphicon glyphicon-briefcase"></span> Admin</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}"><span
+                                    class="glyphicon glyphicon-log-out"></span> Abmelden</a>
+                    </li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}"><span
+                                    class="glyphicon glyphicon-log-out"></span> Abmelden</a>
+                    </li>
+                {% else %}
+                    {% if (app.request.attributes.get('_route') == 'fos_user_security_login') %}
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}"><span
+                                        class="glyphicon glyphicon-user"></span> Registriren</a>
+                        </li>
+                    {% elseif (app.request.attributes.get('_route') == 'fos_user_registration_register') %}
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}"><span
+                                        class="glyphicon glyphicon-log-in"></span> Anmelden</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('fos_user_registration_register') }}"><span
+                                        class="glyphicon glyphicon-user"></span> Registriren</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}"><span
+                                        class="glyphicon glyphicon-log-in"></span> Anmelden</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    {% if is_granted('ROLE_USER') and
+    (app.request.attributes.get('_route') != 'fos_user_profile_show') and
+    (app.request.attributes.get('_route') != 'fos_user_registration_confirmed') %}
+        <div class="row white-box">
+            <div style="clear: both;"></div>
+            <div class="amls">
+                <ul class="nav nav-tabs">
+                    <li {{ (app.request.attributes.get('_route') == 'taskspool') ? ' class="active"' }}
+                            role="presentation" id="taskspool-nav"><a href="{{ path('taskspool') }}">Aufgaben</a></li>
+
+                    <li {{ (app.request.attributes.get('_route') == 'newtask') ? ' class="active"' }}
+                            role="presentation" id="newtask-nav"><a href="{{ path('newtasksinglechoice') }}">Neue Aufgabe</a></li>
+
+                    <li {{ (app.request.attributes.get('_route') == 'taskspackages') ? ' class="active"' }}
+                            role="presentation" id="taskspackages-nav"><a href="{{ path('taskspackages') }}">Pakete</a></li>
+
+                    <li {{ (app.request.attributes.get('_route') == 'newpackage') ? ' class="active"' }}
+                            role="presentation" id="newpackage-nav"><a href="{{ path('newpackage') }}">Neues Paket</a></li>
+
+                </ul>
+            </div>
+            <div>
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    {% else %}
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

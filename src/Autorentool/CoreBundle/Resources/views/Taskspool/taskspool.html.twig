@@ -1,0 +1,117 @@
+{% extends '@AutorentoolCore/main/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/taskspool.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/taskspool.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <table id="taskspool-table" class="table table-bordered dt-responsive nowrap tasksdatatable" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Tittle</th>
+                <th>Erstellt</th>
+                <th>Aufgabentyp</th>
+                <th>Status</th>
+                <th style="text-align:center"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for assessment in assessemntItems %}
+                <tr>
+                    <td>{{ assessment.tittle }}</td>
+                    <td>{{ assessment.creationTimestamp|date('d/m/y H:i:s', "Europe/Berlin") }}</td>
+
+                    {% if assessment.identifier == 'choice' %}
+                        <td>Single-Choice</td>
+                    {% elseif assessment.identifier == 'choiceMultiple' %}
+                        <td>Multiple-Choice</td>
+                    {% elseif assessment.identifier == 'positionObjects' %}
+                        <td>Hotspot</td>
+                    {% elseif assessment.identifier == 'table' %}
+                        <td>Table</td>
+                    {% elseif assessment.identifier == 'dragndropTable' %}
+                        <td>Drag'n'Drop</td>
+                    {% endif %}
+
+                    {% if assessment.stateOfTask == true %}
+                        <td>Aktiv</td>
+                    {% else %}
+                        <td>Entwurf</td>
+                    {% endif %}
+                    <td class="td-buttons-table">
+                        {% if assessment.identifier == 'choice' %}
+                            <a type="button" class="btn btn-default tasktable-btn btn-edit-task"
+                               data-tooltip="tooltip" title="Aufgabe Editieren"
+                                data-edit-link="{{ path('taskeditsingle', {'uuid': assessment.uuid}) }}">
+                                <span class="glyphicon glyphicon-edit" style="vertical-align:middle" aria-hidden="true"></span>
+                            </a>
+                        {% elseif assessment.identifier == 'choiceMultiple' %}
+                            <a type="button" class="btn btn-default tasktable-btn btn-edit-task"
+                               data-tooltip="tooltip" title="Aufgabe Editieren"
+                               data-edit-link="{{ path('taskeditmultiple', {'uuid': assessment.uuid}) }}">
+                                <span class="glyphicon glyphicon-edit" style="vertical-align:middle" aria-hidden="true"></span>
+                            </a>
+                        {% elseif assessment.identifier == 'positionObjects' %}
+                            <a type="button" class="btn btn-default tasktable-btn btn-edit-task"
+                               data-tooltip="tooltip" title="Aufgabe Editieren"
+                               data-edit-link="{{ path('taskedithotspot', {'uuid': assessment.uuid}) }}">
+                                <span class="glyphicon glyphicon-edit" style="vertical-align:middle" aria-hidden="true"></span>
+                            </a>
+                        {% elseif assessment.identifier == 'table' %}
+                            <a type="button" class="btn btn-default tasktable-btn btn-edit-task"
+                               data-tooltip="tooltip" title="Aufgabe Editieren"
+                               data-edit-link="{{ path('taskedittable', {'uuid': assessment.uuid}) }}">
+                                <span class="glyphicon glyphicon-edit" style="vertical-align:middle" aria-hidden="true"></span>
+                            </a>
+                        {% elseif assessment.identifier == 'dragndropTable' %}
+                            <a type="button" class="btn btn-default tasktable-btn btn-edit-task"
+                               data-tooltip="tooltip" title="Aufgabe Editieren"
+                               data-edit-link="{{ path('taskeditdragtable', {'uuid': assessment.uuid}) }}">
+                                <span class="glyphicon glyphicon-edit" style="vertical-align:middle" aria-hidden="true"></span>
+                            </a>
+                        {% endif %}
+                        <a type="button" class="btn btn-danger tasktable-btn task-delete"
+                           data-tooltip="tooltip" title="Aufgabe entfernen"
+                           data-delete-link="{{ path('deletetask', {'uuid': assessment.uuid}) }}">
+                            <span class="glyphicon glyphicon-trash" style="vertical-align:middle" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="tasksbtn-container">
+        <a type="button" class="btn btn-success pull-right" href="{{ path('newtasksinglechoice') }}">Neue Aufgabe</a>
+    </div>
+    <div>
+        <a type="button" class="btn btn-success pull-right ajaxTest">Ajax</a>
+    </div>
+
+    <!-- Modal Submit-->
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        {{ include('AutorentoolCoreBundle:Taskspool:modal_delete.html.twig') }}
+    </div>
+
+    <!-- Modal warning state of task change-->
+    <div class="modal fade" id="modalDeleteDesign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        {{ include('AutorentoolCoreBundle:Taskspool:modal_delete_design.html.twig') }}
+    </div>
+
+    <!-- Modal warning state of task change-->
+    <div class="modal fade" id="modalDesign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        {{ include('AutorentoolCoreBundle:Taskspool:modal_design.html.twig') }}
+    </div>
+
+    <script>
+        $('.tasksdatatable td').css('white-space','normal');
+    </script>
+{% endblock %}

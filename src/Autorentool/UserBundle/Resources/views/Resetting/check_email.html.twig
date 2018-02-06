@@ -1,0 +1,21 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div class="login-container">
+        <div class="login-form">
+            <p align=center>
+                {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+            </p>
+
+            <span class="help-block"></span>
+
+            <p align=right>
+                <a href="{{ path('fos_user_security_login') }}">Zurück zur Anmeldung</a>
+            </p>
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

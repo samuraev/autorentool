@@ -1,0 +1,59 @@
+.show-info:hover {
+    background-color: rgb(66, 139, 202);
+    color: white;
+}
+
+
+.show-info:hover {
+    cursor: pointer;
+}
+
+.tasksbtn-container {
+    margin: 20px 10px 20px 0;
+    padding-bottom: 30px;
+}
+
+.btn {
+    box-shadow: none;
+    margin: 0 5px 0 5px;
+}
+
+.conf-abort {
+    color: black;
+}
+
+.modal-open {
+    padding-right: 0 !important;
+}
+
+.btn-default {
+    background-color: white;
+}
+
+.btn-edit-task {
+    color: black;
+}
+
+/* -------- new package ------- */
+.description {
+    margin: 10px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+#newpackage-tittle {
+    width: 100%;
+    margin: 0 0 5px 0;
+}
+
+#newpackage-description {
+    resize: vertical;
+    width: 100%;
+    height: 100px;
+    margin: 5px 0 10px 0;
+}
+
+.validation-error-class {
+    color:#FF0000;  /* red */
+}

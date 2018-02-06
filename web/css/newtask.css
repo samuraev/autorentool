@@ -1,0 +1,310 @@
+.form-control {
+    margin: 10px 0 10px 0;
+}
+
+.btn-savetask, .btn-cancel {
+    margin: 5px 5px 10px 5px;
+    box-shadow: none;
+}
+
+.btn-tasksave-container {
+    margin: 10px;
+}
+
+.btn {
+    box-shadow: none;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:hover {
+    outline: 0 !important
+}
+
+.btn-deletetask {
+    -webkit-box-shadow: 0 0 3px 1px #b92c28;
+    -moz-box-shadow: 0 0 3px 1px #b92c28;
+    box-shadow: 0 0 3px 1px #b92c28;
+}
+
+.btn-task-questionadd {
+    box-shadow: none;
+}
+
+.div-button-related {
+    text-align:center;
+}
+
+#related-tasks-count {
+    width:30px;
+    margin:7px 0 0 5px;
+}
+
+.btn-related {
+    width: 90%;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.tittel-image-label {
+    margin-top: 6px;
+}
+
+.tittel-image-label>img {
+    width: 100%;
+    border: none;
+}
+
+.table-question.caption{
+    width: 100%;
+    display: block;
+    resize: vertical;
+    min-height: 25px;
+    max-height: 100px;
+    margin: 5px 0 5px 0;
+}
+
+.table-question.imgSrc{
+    width: 100%;
+    display: block;
+    margin-top: 3px;
+}
+
+.custom-combobox {
+    position: relative;
+    display: inline-block;
+    padding: 0 5px;
+}
+
+.custom-combobox-toggle {
+    position: absolute;
+    top: -1px;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+}
+
+.custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
+    outline: none;
+    resize: vertical;
+    width: 100%;
+}
+
+.custom-combobox-input:focus {
+    background-color: #c4e3f3;
+}
+
+.tasktittle {
+    resize: vertical;
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+.form-control.taskparagraph {
+    resize: vertical;
+    width: 100%;
+    height: 100px;
+    margin: 5px 0 5px 0;
+}
+
+.row-task {
+    margin: 5px 0 5px 0;
+}
+
+.answer-row {
+    margin: 5px 0 5px 0;
+}
+
+.removeImgLinkButton, .clearImgLinkButton {
+    background:none!important;
+    color:inherit;
+    border:none;
+    padding:0!important;
+    font: inherit;
+    font-family:arial,sans-serif; /*input has OS specific font-family*/
+    color:#069;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    text-align: center;
+    padding-top: 2px;
+    cursor: pointer;
+    box-shadow: none;
+    width: 100%;
+    height: 26px;
+    background-color: white;
+}
+
+#task-custom-file-upload {
+    margin-top: 5px;
+
+}
+
+#task-show-file-upload {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#related-tasks-count {
+    cursor: default;
+    text-align: center;
+}
+
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+.spinner input {
+    text-align: right;
+}
+
+.input-group-btn-vertical {
+    position: relative;
+    white-space: nowrap;
+    width: 2%;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.input-group-btn-vertical > .btn {
+    display: block;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    margin-left: -1px;
+    position: relative;
+    border-radius: 0;
+}
+
+.input-group-btn-vertical > .btn:first-child {
+    border-top-right-radius: 4px;
+}
+
+.input-group-btn-vertical > .btn:last-child {
+    margin-top: -2px;
+    border-bottom-right-radius: 4px;
+}
+
+.input-group-btn-vertical i {
+    position: absolute;
+    top: 0;
+    left: 4px;
+}
+
+.tittle-img-preview {
+    border:1px solid #ccc;
+    width: 150px;
+    height: 100px;
+    cursor: pointer;
+}
+
+.simplechoice-img-preview {
+    border:1px solid #ccc;
+    width: 75px;
+    height: 50px;
+    cursor: pointer;
+}
+
+#parentOfCanvas {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    text-align: center;
+}
+
+.bgImage {
+    display: none;
+    border:1px solid #000000;
+}
+
+.hotspotImageFileName, .support-media-filename {
+    margin-top: 0;
+    cursor: inherit;
+}
+
+.removeImg .removeImg {
+    padding: 0 10px 0 10px;
+}
+
+
+@media (max-width: 992px) {
+    .btn-related {
+        width: 120px;
+        height: 30px;
+        margin-top: 5px;
+    }
+}
+
+.cell-el {
+    clear: left;
+    display: block;
+    float: left;
+    text-align: right;
+    width: 20px;
+}
+
+#tabletask-table > thead > tr > td:last-child {
+    padding: 0;
+    margin: 0;
+}
+
+.validation-error-class {
+     color:#FF0000;  /* red */
+ }
+
+.headBg {
+    background-color: #CCCCCC;
+}
+
+.support-container{
+    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    margin-bottom: 10px;
+}
+
+.form-control.support-textbox, .form-control.support-text-description {
+    resize: vertical;
+    width: 100%;
+    min-height: 50px;
+    height: 100px;
+}
+
+.input-group-media-support {
+    margin: 0 0 10px 0;
+}
+
+.support-type > label {
+    margin: 0 15px 0 5px;
+}
+
+#collapseSupport {
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.table-supportrow-add, .table-supportcol-add {
+    height: 24px;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+
+.removeSupportImage {
+    height: 33px;
+}

@@ -1,0 +1,28 @@
+imports:
+    - { resource: parameters.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: de
+    default_img_directory: '%kernel.root_dir%/../web/img'
+
+    # image path
+    img_directory: '%kernel.root_dir%/../web/uploads/img'
+    singleChoice_img_directory: '%kernel.root_dir%/../web/uploads/img/choice'
+    multipleChoice_img_directory: '%kernel.root_dir%/../web/uploads/img/choiceMultiple'
+    hotspot_img_directory: '%kernel.root_dir%/../web/uploads/img/positionObjects'
+    table_img_directory: '%kernel.root_dir%/../web/uploads/img/table'
+    dragndropTable_img_directory: '%kernel.root_dir%/../web/uploads/img/dragndropTable'
+
+    # support media
+    support_directory: '%kernel.root_dir%/../web/uploads/support'
+
+    # package path
+    packages_directory: '%kernel.root_dir%/../web/packages'
+
+    # dtd path
+    dtd_directory: '%kernel.root_dir%/../web/data/dtds'
+
+    # zip file name
+    zip_file_name: 'aufgabenpaket.zip'

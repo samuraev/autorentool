@@ -1,0 +1,34 @@
+<script src="{{ asset('js/singlemultipletask.js') }}"></script>
+
+<div class="row">
+    <div class="col-md-3">
+        {{ form_label(form.itemBody.choiceInteraction.shuffle) }}
+        {{ form_widget(form.itemBody.choiceInteraction.shuffle) }}
+    </div>
+</div>
+
+<table id="smc-table" class="table dt-responsive nowrap" cellspacing="0" border="1" style="border:1px solid lightgray;">
+    <thead>
+    <tr>
+        <th style="width:1%;"><p>Richtige<br>Antwort</p></th>
+        <th style="width: 89%; vertical-align:bottom; text-align:center;"><p>Antworten</p></th>
+        <th style="width: 7%; vertical-align:bottom; text-align:center;"><p>Bild</p></th>
+        <th style="width: 3%; text-align:center;"><p>Delete<br>Antwort</p></th>
+    </tr>
+    </thead>
+    <tbody class="smc-tbody" data-prototype="{{ include('AutorentoolCoreBundle:Tasks/SingleMultipleChoice:answer.html.twig',
+                                                    {'form': form.itemBody.choiceInteraction.simpleChoices.vars.prototype })|e  }}">
+        {% set identifier = form.vars.value.identifier %}
+        {% for simpleChoice in form.itemBody.choiceInteraction.simpleChoices %}
+            <tr>
+                {{ include('AutorentoolCoreBundle:Tasks/SingleMultipleChoice:answer.html.twig', {'form': simpleChoice,
+                    'identifier': identifier}) }}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>
+    <button class="btn btn-warning btn-task-questionadd" type="button"><i class="glyphicon glyphicon-plus"></i> Antwort</button>
+</div>
+
+

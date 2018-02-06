@@ -1,0 +1,37 @@
+{% extends '@AutorentoolUser/layout.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div class="login-container">
+        <img src="{{ asset('img/logo.png') }}">
+        <div class="login-form">
+            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+
+                <div class="input-group input-group-password">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder':'form.password'}}) }}
+                </div>
+                {{ form_errors(form.plainPassword.first) }}
+
+                <span class="help-block"></span>
+
+                <div class="input-group input-group-password">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder':'form.password_confirmation'}}) }}
+                </div>
+
+                <span class="help-block"></span>
+
+                <div>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="{{ 'resetting.reset.submit'|trans }}" />
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock fos_user_content %}

@@ -1,0 +1,28 @@
+
+<td align="center">
+    {{ form_row(form.isrightanswer) }}
+</td>
+<td align="center">
+    {{ form_row(form.caption) }}
+</td>
+<td align="center">
+    <label for="{{ form.imgSrc.vars.id }}"
+           onchange="setAntwortImage({{ form.imgSrc.vars.id }}, {{ form.removeImgSrcState.vars.id }})">
+        {% if (form.imgSrc.vars.data) %}
+            <img src="{{ asset('uploads/img/' ~ identifier ~ '/' ~ form.imgSrc.vars.data.filename) }}"
+                 id="simplechoice-img-preview-{{ form.imgSrc.vars.id }}"
+                 class="simplechoice-img-preview" alt="Kein Bild"/>
+        {% else %}
+            <img src="{{ asset('img/empty.svg') }}"
+                 id="simplechoice-img-preview-{{ form.imgSrc.vars.id }}"
+                 class="simplechoice-img-preview" alt="Kein Bild"/>
+        {% endif %}
+        {{ form_row(form.imgSrc) }}
+        {{ form_row(form.removeImgSrcState) }}
+        <button type="button" class="removeImgLinkButton" id="removeAntwortImgLink"
+                onclick="removeImageFromAntwort({{ form.imgSrc.vars.id }}, {{ form.removeImgSrcState.vars.id }})">[Remove]</button>
+    </label>
+</td>
+<td align="center">
+    <button class="btn btn-sm btn-danger btn-deletetask" style="display:none;" type="button"><i class="fa fa-trash-o"></i></button>
+</td>
